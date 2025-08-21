@@ -18,7 +18,7 @@ export const createCourseRoute: FastifyPluginAsyncZod = async (app) => {
         return reply.status(500).send({ message: 'Failed to create course' })
       }
 
-      return reply.status(201).send({ courseID: result[0].id })
+      return reply.status(201).send({ courseId: result[0].id })
     },
   )
 }

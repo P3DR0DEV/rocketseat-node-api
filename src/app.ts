@@ -14,7 +14,7 @@ const app = fastify({
     transport: {
       target: 'pino-pretty',
       options: {
-        translateTime: 'HH:MM:ss Z',
+        translateTime: 'SYS:h:MM:ss TT Z',
         ignore: 'pid,hostname',
       },
     },
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'development') {
   app.register(scalarApiReference, {
     routePrefix: '/docs',
     configuration: {
-      theme: 'kepler'
+      theme: 'kepler',
     },
   })
 }

@@ -22,6 +22,27 @@
       "when": 1755539459107,
       "tag": "0002_tearful_landau",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1755697472747,
+      "tag": "0003_lying_arclight",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1755697569668,
+      "tag": "0004_rich_cassandra_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1755698991489,
+      "tag": "0005_flashy_peter_quill",
+      "breakpoints": true
     }
   ]
 }

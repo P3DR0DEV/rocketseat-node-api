@@ -9,7 +9,7 @@ export const getCourseByIdRoute: FastifyPluginAsyncZod = async (app) => {
   app.get(
     '/:id',
     {
-      schema: getCourseByIdRouteSchema ,
+      schema: getCourseByIdRouteSchema,
     },
     async (req, reply) => {
       const { id } = req.params
@@ -20,7 +20,7 @@ export const getCourseByIdRoute: FastifyPluginAsyncZod = async (app) => {
         return reply.status(404).send()
       }
 
-      return reply.send({ course })
+      return reply.send({ course: course[0] })
     },
   )
 }
