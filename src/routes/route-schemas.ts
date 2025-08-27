@@ -71,3 +71,25 @@ export const createCourseRouteSchema = {
     }),
   },
 } as const
+
+export const loginRouteSchema = {
+  tags: ['auth'],
+  description: 'Login user',
+  summary: 'Login user',
+  body: z.object({
+    email: z.email(),
+    password: z.string(),
+  }),
+  response: {
+    200: z
+      .object({
+        token: z.string(),
+      })
+      .describe('JWT token for authenticated user'),
+    400: z
+      .object({
+        message: z.string(),
+      })
+      .describe('Invalid credentials'),
+  },
+} as const

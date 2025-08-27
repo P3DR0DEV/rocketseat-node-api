@@ -2,6 +2,7 @@ import supertest from 'supertest'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { app } from '#app/app.ts'
 import { makeCourse } from '#app/tests/factories/make-course.ts'
+import { makeAuthenticatedUser } from '#app/tests/factories/make-user.ts'
 
 describe('Get a course by id [E2E]', async () => {
   beforeAll(async () => {
@@ -10,9 +11,9 @@ describe('Get a course by id [E2E]', async () => {
 
   it('should return a single course', async () => {
     const course = await makeCourse()
+    const { token } = await makeAuthenticatedUser()
 
-    const response = await supertest(app.server)
-      .get(`/courses/${course.id}`)
+    const response = await supertest(app.server).get(`/courses/${course.id}`).set('Authorization', `${token}`)
 
     expect(response.status).toEqual(200)
 
@@ -21,12 +22,16 @@ describe('Get a course by id [E2E]', async () => {
         id: course.id,
         title: course.title,
         description: course.description,
-      }
+      },
     })
   })
 
   it('should return 404 if course not found', async () => {
-    const response = await supertest(app.server).get(`/courses/d912a0f6-dcba-4381-88a7-500537196fdb`)
+    const { token } = await makeAuthenticatedUser()
+
+    const response = await supertest(app.server)
+      .get(`/courses/d912a0f6-dcba-4381-88a7-500537196fdb`)
+      .set('Authorization', `${token}`)
 
     expect(response.status).toEqual(404)
   })

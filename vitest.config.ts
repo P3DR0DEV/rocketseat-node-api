@@ -8,6 +8,7 @@ export default defineConfig({
     root: './',
     coverage: {
       enabled: true,
+      include: ['src/**/*.e2e-spec.ts'],
     },
   }
 })

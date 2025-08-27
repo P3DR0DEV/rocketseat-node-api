@@ -2,12 +2,15 @@ import { and, asc, count, eq, ilike, type SQL } from 'drizzle-orm'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { db } from '#app/database/client.ts'
 import { courses, enrollments } from '#app/database/schema.ts'
+import { checkRequestJwt } from '../hooks/check-request-jwt.ts'
+import { checkUserRole } from '../hooks/check-user-role.ts'
 import { getCoursesRouteSchema } from '../route-schemas.ts'
 
 export const getCoursesRoute: FastifyPluginAsyncZod = async (app) => {
   app.get(
     '/',
     {
+      preHandler: [checkRequestJwt, checkUserRole('manager')],
       schema: getCoursesRouteSchema,
     },
     async (req, reply) => {

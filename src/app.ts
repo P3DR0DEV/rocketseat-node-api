@@ -8,6 +8,7 @@ import {
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 import { coursesRoutes } from '#app/routes/courses/index.ts'
+import { loginRoute } from './routes/auth/login.ts'
 
 const app = fastify({
   logger: {
@@ -46,6 +47,8 @@ if (process.env.NODE_ENV === 'development') {
   })
 }
 // Registro de Rotas
+app.register(loginRoute)
+
 app.register(coursesRoutes, {
   prefix: '/courses',
 })
